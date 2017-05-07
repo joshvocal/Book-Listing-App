@@ -1,5 +1,7 @@
 package me.joshvocal.booklisting;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,6 +41,7 @@ public final class QueryUtils {
 
         try {
 
+            // Get the base JSON response from the Google Books API.
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
 
             JSONArray itemsArray = baseJsonResponse.getJSONArray("items");
@@ -88,15 +91,19 @@ public final class QueryUtils {
 
                 }
 
-                String url = "";
+                String url;
+                Bitmap bitmap = null;
                 JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
 
                 if (imageLinks.has("smallThumbnail")) {
                     url = imageLinks.getString("smallThumbnail");
+                    bitmap = getBitmapFromURL(url);
                 }
 
+                // Create a new book with all of these properties.
                 Book book = new Book(title, subtitle, authors,
-                        description, ISBN_13, publishDate, url);
+                        description, ISBN_13, publishDate, bitmap);
+                // Add a new book to the ListView collection.
                 books.add(book);
 
             }
@@ -107,6 +114,26 @@ public final class QueryUtils {
         }
 
         return books;
+    }
+
+    // Convert the Google Books API thumbnail link into a Bitmap image.
+    private static Bitmap getBitmapFromURL(String urlString) {
+        Bitmap bitmap = null;
+
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            bitmap = BitmapFactory.decodeStream(input);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
     }
 
     private static URL createUrl(String stringUrl) {
@@ -159,13 +186,13 @@ public final class QueryUtils {
         }
 
         return jsonResponse;
-
     }
 
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            InputStreamReader inputStreamReader
+                    = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
             while (line != null) {
@@ -173,16 +200,18 @@ public final class QueryUtils {
                 line = reader.readLine();
             }
         }
+
         return output.toString();
     }
 
     public static List<Book> fetchBookData(String requestUrl) {
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Simulates a slower connection. Comment out when finished testing.
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         // Create URL object
         URL url = createUrl(requestUrl);

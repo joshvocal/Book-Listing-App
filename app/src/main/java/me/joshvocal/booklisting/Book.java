@@ -1,5 +1,7 @@
 package me.joshvocal.booklisting;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by josh on 5/6/17.
  */
@@ -12,16 +14,17 @@ public class Book {
     private String mDescription;
     private String mISBN_13;
     private String mPublishDate;
-    private String mUrl;
+    private Bitmap mThumbnail;
 
     public Book (String title, String subtitle, String[] authors, String description,
-                String ISBN_13, String publishDate, String url) {
+                String ISBN_13, String publishDate, Bitmap thumbnail) {
         mTitle = title;
         mSubtitle = subtitle;
         mAuthors = authors;
         mDescription = description;
         mISBN_13 = ISBN_13;
         mPublishDate = publishDate;
+        mThumbnail = thumbnail;
     }
 
     public String getTitle() {
@@ -44,12 +47,12 @@ public class Book {
         return mISBN_13;
     }
 
-    public String getmPublishDate() {
+    public String getPublishDate() {
         return mPublishDate;
     }
 
-    public String getUrl() {
-        return mUrl;
+    public Bitmap getThumbnail() {
+        return mThumbnail;
     }
 
 }

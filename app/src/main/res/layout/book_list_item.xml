@@ -23,7 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="@android:color/black"
             android:textSize="16dp"
             tools:text="Book Title" />
@@ -33,17 +35,19 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
             tools:text="Author" />
 
         <TextView
-            android:id="@+id/book_subtitle"
+            android:id="@+id/book_published_date"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             tools:text="Subtitle" />
-
-
 
 
     </LinearLayout>

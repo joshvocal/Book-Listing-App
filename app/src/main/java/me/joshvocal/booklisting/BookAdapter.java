@@ -1,9 +1,6 @@
 package me.joshvocal.booklisting;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,10 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -29,7 +22,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         super(context, 0, books);
     }
 
-    private String formatAuthors(String[] authors) {
+    public static String formatAuthors(String[] authors) {
         String authorsString = "";
 
         for (String author : authors) {
@@ -43,33 +36,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         return authorsString;
     }
 
-    private Bitmap getBitmapFromURL(final String urlString) {
 
-        Bitmap bitmap = null;
-
-        new AsyncTask<String, Void, Bitmap>() {
-            @Override
-            protected Bitmap doInBackground(String... params) {
-                try {
-                    InputStream inputStream = new URL(urlString).openStream();
-                    bitmap = BitmapFactory.decodeStream(inputStream);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                return bitmap;
-            }
-        }.execute();
-
-        return bitmap;
-    }
 
     @NonNull
     @Override
@@ -84,16 +51,16 @@ public class BookAdapter extends ArrayAdapter<Book> {
         Book currentBook = getItem(position);
 
         ImageView thumbnailImageView = (ImageView) listItemView.findViewById(R.id.book_thumbnail);
-        thumbnailImageView.setImageBitmap(getBitmapFromURL(currentBook.getUrl()));
+        thumbnailImageView.setImageBitmap(currentBook.getThumbnail());
 
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.book_title);
         titleTextView.setText(currentBook.getTitle());
 
-        TextView subtitleTextView = (TextView) listItemView.findViewById(R.id.book_subtitle);
-        subtitleTextView.setText(currentBook.getSubtitle());
-
         TextView authorTextView = (TextView) listItemView.findViewById(R.id.book_author);
         authorTextView.setText(formatAuthors(currentBook.getAuthors()));
+
+        TextView subtitleTextView = (TextView) listItemView.findViewById(R.id.book_published_date);
+        subtitleTextView.setText(currentBook.getPublishDate());
 
         return listItemView;
     }
