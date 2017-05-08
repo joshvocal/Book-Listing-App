@@ -8,6 +8,10 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,7 +25,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final String LOG_TAG = MainActivity.class.getName();
     private static final String GOOGLE_BOOKS_API_REQUEST_URL
-            = "https://www.googleapis.com/books/v1/volumes?q=stevejobs";
+            = "https://www.googleapis.com/books/v1/volumes?q=";
 
     private static final int BOOK_LOADER_ID = 1;
     public static final String THUMBNAIL_CODE = "THUMBNAIL_CODE";
@@ -71,10 +75,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-        // Start the AsyncTask to fetch the earthquake data.
-        BookAsyncTask task = new BookAsyncTask();
-        task.execute(GOOGLE_BOOKS_API_REQUEST_URL);
 
         isNetworkAvailable();
 
@@ -155,4 +155,31 @@ public class MainActivity extends AppCompatActivity
         mBookAdapter.clear();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchView.clearFocus();
+
+                BookAsyncTask task = new BookAsyncTask();
+                task.execute(GOOGLE_BOOKS_API_REQUEST_URL + query);
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
 }

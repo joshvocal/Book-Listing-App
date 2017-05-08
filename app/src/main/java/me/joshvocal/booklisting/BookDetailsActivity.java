@@ -48,7 +48,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         descriptionTextView.setText(append("Description: ", description));
     }
 
-    // Concatenate a string you want to bold with another non-bolded string.
+    // Concatenate a string you want to bold with another non-bold string.
     private SpannableStringBuilder append(String boldText, String text) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
         StyleSpan boldSpan = new StyleSpan(android.graphics.Typeface.BOLD);
