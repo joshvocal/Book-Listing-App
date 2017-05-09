@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/home/josh/AndroidStudioProjects/BookListing/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/home/josh/AndroidStudioProjects/Book-Listing-App/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="b095fd412d0abf7b3207670dfcae8e6b475d4c28">
-        <dex dex="/home/josh/AndroidStudioProjects/BookListing/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e1837edea6be6028f869125395994db2edc3c7dc/classes.dex" />
+        sha1="2d03c8d17dbbde4229031d8bea6ffa74e4967fea">
+        <dex dex="/home/josh/AndroidStudioProjects/Book-Listing-App/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_19ae169c67291753745bf181a35ab8141cc57379/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/josh/AndroidStudioProjects/BookListing/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/home/josh/AndroidStudioProjects/Book-Listing-App/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
-        <dex dex="/home/josh/AndroidStudioProjects/BookListing/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_ff5862f24ee701643ca81794b3ecfaec94cf23b0/classes.dex" />
+        <dex dex="/home/josh/AndroidStudioProjects/Book-Listing-App/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_a9e6ec0497b6c0620868a422a20023297c5f86b7/classes.dex" />
     </item>
 
 </items>
