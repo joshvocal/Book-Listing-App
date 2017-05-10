@@ -4,7 +4,7 @@
 
 An app to list the published books on a given topic using the [Google Books API](https://developers.google.com/books/docs/v1/getting_started).
 
-This app is part of the [Android Basics Nanodegree Program by Google at Udacity](https://www.udacity.com/course/android-basics-networking--ud843).
+This app is [a project](https://www.udacity.com/course/android-basics-networking--ud843) that is part of the [Android Basics Nanodegree Program by Google at Udacity](https://www.udacity.com/course/android-basics-nanodegree-by-google--nd803).
 
 ## Demo
 
